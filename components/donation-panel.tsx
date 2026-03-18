@@ -5,15 +5,17 @@ const suggestedAmounts = [25, 50, 100];
 type DonationPanelProps = {
   title?: string;
   description?: string;
+  anchorId?: string;
 };
 
 export function DonationPanel({
   title = "Support the retreat library",
   description =
     "Members can give securely online to help sustain the audio archive and future resource development.",
+  anchorId,
 }: DonationPanelProps) {
   return (
-    <section className="surface-panel rounded-[1.9rem] p-6 sm:p-8">
+    <section id={anchorId} className="surface-panel rounded-[1.9rem] p-6 sm:p-8">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="editorial-label">Online giving</p>

@@ -85,14 +85,17 @@ export default async function SessionPage({ params }: SessionPageProps) {
           </div>
         </div>
         <div className="flex flex-wrap gap-3">
+          <Link href="#donate-now" className="brand-button-secondary">
+            Donate
+          </Link>
           <Link href="/" className="brand-button-ghost">
             Back to all sessions
           </Link>
-        <form action={signOut}>
-          <button className="brand-button-ghost" type="submit">
-            Sign out
-          </button>
-        </form>
+          <form action={signOut}>
+            <button className="brand-button-ghost" type="submit">
+              Sign out
+            </button>
+          </form>
         </div>
       </div>
 
@@ -229,8 +232,9 @@ export default async function SessionPage({ params }: SessionPageProps) {
 
       <div className="mt-8">
         <DonationPanel
+          anchorId="donate-now"
           title="Give a donation online"
-          description="If these teachings and resources are serving members well, you can give securely online to support future ministry content and retreat resources."
+          description="If these teachings and resources have been a blessing to you, you can give securely online to support the ministry, content, and retreat resources."
         />
       </div>
     </main>
