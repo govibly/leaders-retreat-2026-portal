@@ -3,7 +3,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { signIn, signUp } from "@/app/auth/actions";
-import { BonusDownloads } from "@/components/bonus-downloads";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
@@ -80,12 +79,12 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               <div>
                 <p className="editorial-label">ANFGC Leader&apos;s Retreat 2026</p>
                 <p className="mt-2 text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
-                  Private member access
+                  Exclusive member access
                 </p>
               </div>
             </div>
             <h1 className="font-display mt-5 max-w-3xl text-[3.4rem] leading-[0.92] text-white sm:text-[4.6rem] lg:text-[5.4rem]">
-              Step back into the retreat with full-session access.
+              Step back into the retreat and relive the full experience.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--muted-strong)] sm:text-lg">
               Sign in to continue listening, or create an account to open the
@@ -95,7 +94,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               {[
                 "11 audio sessions",
                 "Session resources attached",
-                "Protected member access",
+                "Additional bonus materials",
               ].map((item) => (
                 <div
                   key={item}
@@ -234,12 +233,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               </button>
             </form>
           </section>
-
-          <BonusDownloads
-            title="Bonus reading included"
-            description="Members also receive four bonus PDF guides that expand on the retreat themes and support continued reflection."
-            compact
-          />
         </div>
       </section>
     </main>
