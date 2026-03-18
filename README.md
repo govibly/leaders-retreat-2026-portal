@@ -4,6 +4,7 @@ This project is a Next.js media portal for Leader's Retreat 2026. It uses:
 
 - Supabase Auth for registration and sign-in
 - Cloudflare R2 for MP3 and PDF delivery
+- Stripe Checkout for online donations
 - Local typed metadata for the session library
 
 ## Local Development
@@ -42,6 +43,8 @@ Add these environment variables in Vercel:
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...`
 - `NEXT_PUBLIC_STORAGE_PROVIDER=cloudflare-r2`
 - `NEXT_PUBLIC_CLOUDFLARE_PUBLIC_BASE_URL=https://pub-d44ff5448e9e41dfb68e298ae2b174dc.r2.dev`
+- `STRIPE_SECRET_KEY=...`
+- `STRIPE_DONATION_CURRENCY=cad`
 
 Before deploying, make sure Supabase Auth has:
 
@@ -64,6 +67,23 @@ Then deploy with:
 npm run lint
 npm run build
 ```
+
+## Donations
+
+Online donations are handled with Stripe Checkout.
+
+Why Stripe fits this stack best:
+
+- it integrates cleanly with Next.js server actions and Vercel
+- sensitive payment logic stays server-side
+- Checkout reduces PCI scope and gives a fast secure payment flow
+- it supports future expansion into recurring giving, receipts, and webhooks
+
+The current setup uses one-time donations with preset and custom amounts for signed-in members.
+
+Note on MP3 protection:
+
+The browser download control is disabled on the built-in player UI, but a public media URL can still be downloaded outside the player. True download prevention requires moving audio off public URLs and serving it through signed, short-lived streaming links.
 
 ## Auth Notes
 

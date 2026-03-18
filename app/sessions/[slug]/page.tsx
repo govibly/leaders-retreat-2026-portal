@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 
 import { signOut } from "@/app/auth/actions";
 import { BonusDownloads } from "@/components/bonus-downloads";
+import { DonationPanel } from "@/components/donation-panel";
+import { ProtectedAudioPlayer } from "@/components/protected-audio-player";
 import { getPublishedSessions, getSessionBySlug } from "@/lib/session-data";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
@@ -146,10 +148,10 @@ export default async function SessionPage({ params }: SessionPageProps) {
               </p>
             </div>
             <div className="rounded-[1.7rem] border border-white/10 bg-black/30 p-4">
-              <audio controls preload="metadata" className="mt-2 w-full">
-                <source src={session.audioPublicUrl} type="audio/mpeg" />
-                Your browser does not support MP3 playback.
-              </audio>
+              <ProtectedAudioPlayer src={session.audioPublicUrl} className="mt-2 w-full" />
+              <p className="mt-3 text-xs leading-6 text-[var(--muted)]">
+                The in-browser download option has been disabled on the player. For stronger protection later, the MP3 files should move from public URLs to signed streaming links.
+              </p>
             </div>
             <div className="grid gap-3 pt-2">
               {session.downloads.map((download) => (
@@ -222,6 +224,13 @@ export default async function SessionPage({ params }: SessionPageProps) {
           anchorId="bonus-guides"
           title="Bonus guides available with every session"
           description="These bonus PDF resources are available throughout the retreat library for deeper study, review, and follow-up conversations."
+        />
+      </div>
+
+      <div className="mt-8">
+        <DonationPanel
+          title="Give a donation online"
+          description="If these teachings and resources are serving members well, you can give securely online to support future ministry content and retreat resources."
         />
       </div>
     </main>

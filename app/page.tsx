@@ -2,13 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { DonationPanel } from "@/components/donation-panel";
 import { signOut } from "@/app/auth/actions";
 import { BonusDownloads } from "@/components/bonus-downloads";
 import { getPublishedSessions } from "@/lib/session-data";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function Home() {
+type HomePageProps = {
+  searchParams: Promise<{
+    donation?: string;
+  }>;
+};
+
+export default async function Home({ searchParams }: HomePageProps) {
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const {
@@ -20,11 +27,28 @@ export default async function Home() {
     }
   }
 
+  const { donation } = await searchParams;
   const sessions = getPublishedSessions();
   const leadSession = sessions[0];
+  const donationMessage =
+    donation === "success"
+      ? "Thank you for your donation. Your support helps sustain the retreat library."
+      : donation === "canceled"
+        ? "Donation canceled. You can return anytime if you would still like to give."
+        : donation === "invalid"
+          ? "Please enter a valid donation amount of at least $5."
+          : donation === "unavailable"
+            ? "Online giving is not available yet. Add Stripe credentials to enable donations."
+            : null;
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-[92rem] flex-col px-5 py-6 sm:px-8 lg:px-10">
+      {donationMessage ? (
+        <div className="surface-panel mb-6 rounded-[1.5rem] border border-[var(--accent)] px-5 py-4 text-sm leading-7 text-[#f5e3c1]">
+          {donationMessage}
+        </div>
+      ) : null}
+
       <section className="poster-glow surface-panel-strong relative overflow-hidden rounded-[2.2rem] px-6 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
         <div className="absolute inset-0 bg-[linear-gradient(140deg,rgba(255,255,255,0.05),transparent_32%,rgba(207,177,122,0.08)_70%,transparent)]" />
         <div className="relative grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
@@ -267,6 +291,10 @@ export default async function Home() {
           title="Bonus guides for listeners and members"
           description="Alongside each session, members can also download these four bonus PDF guides for personal review, follow-up study, and group reflection."
         />
+      </div>
+
+      <div className="mt-8">
+        <DonationPanel />
       </div>
     </main>
   );
