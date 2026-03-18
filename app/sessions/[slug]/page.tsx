@@ -152,9 +152,6 @@ export default async function SessionPage({ params }: SessionPageProps) {
             </div>
             <div className="rounded-[1.7rem] border border-white/10 bg-black/30 p-4">
               <ProtectedAudioPlayer src={session.audioPublicUrl} className="mt-2 w-full" />
-              <p className="mt-3 text-xs leading-6 text-[var(--muted)]">
-                The in-browser download option has been disabled on the player. For stronger protection later, the MP3 files should move from public URLs to signed streaming links.
-              </p>
             </div>
             <div className="grid gap-3 pt-2">
               {session.downloads.map((download) => (
