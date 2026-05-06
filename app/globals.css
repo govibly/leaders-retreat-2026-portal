@@ -80,7 +80,9 @@ audio {
 }
 
 .font-display {
-  font-family: var(--font-display), serif;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
 
 .surface-panel {

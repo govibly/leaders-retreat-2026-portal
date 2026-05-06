@@ -38,7 +38,7 @@ export default async function Home({ searchParams }: HomePageProps) {
         : donation === "invalid"
           ? "Please enter a valid donation amount of at least $5."
           : donation === "unavailable"
-            ? "Online giving is not available yet. Add Stripe credentials to enable donations."
+            ? "Online giving is temporarily unavailable. Please try again shortly."
             : null;
 
   return (
@@ -72,14 +72,19 @@ export default async function Home({ searchParams }: HomePageProps) {
                   </p>
                 </div>
               </div>
-              <form action={signOut}>
-                <button className="brand-button-ghost" type="submit">
-                  Sign out
-                </button>
-              </form>
+              <div className="flex w-full flex-wrap justify-start gap-3 sm:w-auto sm:justify-end">
+                <Link className="brand-button-secondary" href="#donate-now">
+                  Donate
+                </Link>
+                <form action={signOut}>
+                  <button className="brand-button-ghost" type="submit">
+                    Sign out
+                  </button>
+                </form>
+              </div>
             </div>
             <div className="editorial-rule mt-5 max-w-44" />
-            <h1 className="font-display mt-7 max-w-5xl text-[3.4rem] leading-[0.92] text-white sm:text-[4.6rem] lg:text-[5.9rem] xl:text-[6.6rem]">
+            <h1 className="font-display mt-7 max-w-[9.75ch] text-[3.15rem] leading-[0.88] tracking-[-0.055em] text-white sm:max-w-[10.75ch] sm:text-[4.45rem] lg:max-w-[11.2ch] lg:text-[5.7rem] xl:text-[6.2rem]">
               The Year of the Holy Spirit.
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--muted-strong)] sm:text-lg">
@@ -141,7 +146,7 @@ export default async function Home({ searchParams }: HomePageProps) {
                   Featured reflection
                 </p>
                 <p className="font-display mt-5 max-w-md text-4xl leading-[1.02] text-white sm:text-5xl">
-                  Our emotions may shift, but the Word of God remains steady.
+                  &ldquo;Our emotions may shift, but the Word of God remains steady.&rdquo;
                 </p>
               </div>
               <div className="relative mt-8">
@@ -294,7 +299,7 @@ export default async function Home({ searchParams }: HomePageProps) {
       </div>
 
       <div className="mt-8">
-        <DonationPanel />
+        <DonationPanel anchorId="donate-now" />
       </div>
     </main>
   );

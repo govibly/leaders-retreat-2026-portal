@@ -105,7 +105,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
             <p className="editorial-label">
               {session.eventDay}
             </p>
-            <h1 className="font-display mt-4 max-w-4xl text-[3.4rem] leading-[0.94] text-white sm:text-[4.6rem] lg:text-[5.4rem]">
+            <h1 className="font-display mt-4 max-w-4xl text-[3.1rem] leading-[0.9] tracking-[-0.045em] text-white sm:text-[4.3rem] lg:text-[5.1rem]">
               {session.title}
             </h1>
             <p className="mt-5 text-sm uppercase tracking-[0.28em] text-[var(--muted-strong)]">

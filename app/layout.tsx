@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Sora } from "next/font/google";
+import { Archivo, Sora } from "next/font/google";
 import "./globals.css";
 
-const displayFont = Bodoni_Moda({
+const displayFont = Archivo({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["700", "800"],
 });
 
 const bodyFont = Sora({

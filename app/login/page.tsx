@@ -32,7 +32,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             </span>
             <p className="editorial-label">ANFGC Leader&apos;s Retreat 2026</p>
           </div>
-          <h1 className="font-display mt-4 text-5xl text-white sm:text-6xl">
+          <h1 className="font-display mt-4 max-w-[11ch] text-[3rem] leading-[0.9] tracking-[-0.045em] text-white sm:max-w-[12ch] sm:text-[4.25rem]">
             Member access is not available yet
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--muted-strong)]">
@@ -83,13 +83,21 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 </p>
               </div>
             </div>
-            <h1 className="font-display mt-5 max-w-3xl text-[3.4rem] leading-[0.92] text-white sm:text-[4.6rem] lg:text-[5.4rem]">
+            <h1 className="font-display mt-5 max-w-[10.5ch] text-[3.1rem] leading-[0.89] tracking-[-0.05em] text-white sm:max-w-[11.5ch] sm:text-[4.4rem] lg:max-w-[12.5ch] lg:text-[5.15rem]">
               Step back into the retreat and relive the full experience.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--muted-strong)] sm:text-lg">
               Sign in to continue listening, or create an account to open the
               full session library and receive every companion resource in one place.
             </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row xl:hidden">
+              <a className="brand-button-primary w-full sm:w-auto" href="#sign-in">
+                Sign in
+              </a>
+              <a className="brand-button-secondary w-full sm:w-auto" href="#create-account">
+                Create account
+              </a>
+            </div>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
                 "11 audio sessions",
@@ -146,7 +154,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             </div>
           ) : null}
 
-          <section className="surface-panel rounded-[1.9rem] p-6 sm:p-8">
+          <section id="sign-in" className="surface-panel scroll-mt-6 rounded-[1.9rem] p-6 sm:p-8">
             <p className="editorial-label">
               Sign in
             </p>
@@ -180,7 +188,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             </form>
           </section>
 
-          <section className="surface-panel rounded-[1.9rem] p-6 sm:p-8">
+          <section id="create-account" className="surface-panel scroll-mt-6 rounded-[1.9rem] p-6 sm:p-8">
             <p className="editorial-label">
               Create account
             </p>
@@ -200,7 +208,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                   className="rounded-2xl border border-[var(--border)] bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/35 focus:border-[var(--accent)]"
                   name="churchBranch"
                   type="text"
-                  placeholder="Example: Ajax Central"
+                  placeholder="Example: Ajax"
                   required
                 />
               </label>
