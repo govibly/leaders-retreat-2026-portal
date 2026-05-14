@@ -63,7 +63,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
   const relatedSessions = getPublishedSessions()
     .filter((item) => item.slug !== session.slug)
     .slice(0, 3);
-  const sessionAudioId = `session-audio-${session.id}`;
+  const sessionAccessId = `session-access-${session.id}`;
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-[92rem] flex-col px-5 py-6 sm:px-8 lg:px-10">
@@ -113,10 +113,12 @@ export default async function SessionPage({ params }: SessionPageProps) {
             <p className="mt-5 text-sm uppercase tracking-[0.28em] text-[var(--muted-strong)]">
               Session {String(session.sortOrder).padStart(2, "0")} • {session.speaker}
             </p>
-            <SessionPlayShortcut
-              audioId={sessionAudioId}
-              className="brand-button-primary mt-6 w-full md:hidden"
-            />
+            <div className="mt-6 md:hidden">
+              <SessionPlayShortcut
+                targetId={sessionAccessId}
+                className="brand-button-primary w-full"
+              />
+            </div>
             <p className="mt-8 max-w-3xl text-base leading-8 text-[var(--muted-strong)] sm:text-lg">
               {session.coverCopy}
             </p>
@@ -147,7 +149,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
             </div>
           </div>
 
-          <aside className="surface-panel rounded-[2rem] p-5 sm:p-6">
+          <aside id={sessionAccessId} className="surface-panel rounded-[2rem] p-5 sm:p-6">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[var(--muted)]">
                 Session access
@@ -157,11 +159,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
               </p>
             </div>
             <div className="rounded-[1.7rem] border border-white/10 bg-black/30 p-4">
-              <ProtectedAudioPlayer
-                id={sessionAudioId}
-                src={session.audioPublicUrl}
-                className="mt-2 w-full"
-              />
+              <ProtectedAudioPlayer src={session.audioPublicUrl} className="mt-2 w-full" />
             </div>
             <div className="grid gap-3 pt-2">
               {session.downloads.map((download) => (

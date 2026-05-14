@@ -1,59 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 type SessionPlayShortcutProps = {
-  audioId: string;
+  targetId: string;
   className?: string;
 };
 
 export function SessionPlayShortcut({
-  audioId,
+  targetId,
   className,
 }: SessionPlayShortcutProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const handleClick = () => {
+    const targetElement = document.getElementById(targetId);
 
-  useEffect(() => {
-    const audioElement = document.getElementById(audioId);
-
-    if (!(audioElement instanceof HTMLAudioElement)) {
+    if (!targetElement) {
       return;
     }
 
-    const syncPlaybackState = () => {
-      setIsPlaying(!audioElement.paused && !audioElement.ended);
-    };
+    const targetTop = targetElement.getBoundingClientRect().top + window.scrollY - 24;
 
-    syncPlaybackState();
-    audioElement.addEventListener("play", syncPlaybackState);
-    audioElement.addEventListener("pause", syncPlaybackState);
-    audioElement.addEventListener("ended", syncPlaybackState);
-
-    return () => {
-      audioElement.removeEventListener("play", syncPlaybackState);
-      audioElement.removeEventListener("pause", syncPlaybackState);
-      audioElement.removeEventListener("ended", syncPlaybackState);
-    };
-  }, [audioId]);
-
-  const handleClick = async () => {
-    const audioElement = document.getElementById(audioId);
-
-    if (!(audioElement instanceof HTMLAudioElement)) {
-      return;
-    }
-
-    if (audioElement.paused || audioElement.ended) {
-      try {
-        await audioElement.play();
-      } catch {
-        setIsPlaying(false);
-      }
-
-      return;
-    }
-
-    audioElement.pause();
+    window.scrollTo({
+      top: Math.max(targetTop, 0),
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -61,10 +29,10 @@ export function SessionPlayShortcut({
       type="button"
       className={className}
       onClick={handleClick}
-      aria-controls={audioId}
-      aria-label={isPlaying ? "Pause session audio" : "Play session audio"}
+      aria-controls={targetId}
+      aria-label="Scroll to session audio"
     >
-      {isPlaying ? "Pause Session" : "Play Session"}
+      Play Session
     </button>
   );
 }
