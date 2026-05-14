@@ -8,6 +8,7 @@ import { signOut } from "@/app/auth/actions";
 import { BonusDownloads } from "@/components/bonus-downloads";
 import { DonationPanel } from "@/components/donation-panel";
 import { ProtectedAudioPlayer } from "@/components/protected-audio-player";
+import { SessionPlayShortcut } from "@/components/session-play-shortcut";
 import { getPublishedSessions, getSessionBySlug } from "@/lib/session-data";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
@@ -62,6 +63,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
   const relatedSessions = getPublishedSessions()
     .filter((item) => item.slug !== session.slug)
     .slice(0, 3);
+  const sessionAudioId = `session-audio-${session.id}`;
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-[92rem] flex-col px-5 py-6 sm:px-8 lg:px-10">
@@ -111,12 +113,10 @@ export default async function SessionPage({ params }: SessionPageProps) {
             <p className="mt-5 text-sm uppercase tracking-[0.28em] text-[var(--muted-strong)]">
               Session {String(session.sortOrder).padStart(2, "0")} • {session.speaker}
             </p>
-            <a
-              className="brand-button-primary mt-6 w-full sm:w-auto xl:hidden"
-              href="#session-access"
-            >
-              Play Session
-            </a>
+            <SessionPlayShortcut
+              audioId={sessionAudioId}
+              className="brand-button-primary mt-6 w-full md:hidden"
+            />
             <p className="mt-8 max-w-3xl text-base leading-8 text-[var(--muted-strong)] sm:text-lg">
               {session.coverCopy}
             </p>
@@ -147,7 +147,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
             </div>
           </div>
 
-          <aside id="session-access" className="surface-panel scroll-mt-6 rounded-[2rem] p-5 sm:p-6">
+          <aside className="surface-panel rounded-[2rem] p-5 sm:p-6">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[var(--muted)]">
                 Session access
@@ -157,7 +157,11 @@ export default async function SessionPage({ params }: SessionPageProps) {
               </p>
             </div>
             <div className="rounded-[1.7rem] border border-white/10 bg-black/30 p-4">
-              <ProtectedAudioPlayer src={session.audioPublicUrl} className="mt-2 w-full" />
+              <ProtectedAudioPlayer
+                id={sessionAudioId}
+                src={session.audioPublicUrl}
+                className="mt-2 w-full"
+              />
             </div>
             <div className="grid gap-3 pt-2">
               {session.downloads.map((download) => (

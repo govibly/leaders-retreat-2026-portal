@@ -5,11 +5,13 @@ import { useEffect, useRef } from "react";
 type ProtectedAudioPlayerProps = {
   src: string;
   className?: string;
+  id?: string;
 };
 
 export function ProtectedAudioPlayer({
   src,
   className,
+  id,
 }: ProtectedAudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -26,6 +28,7 @@ export function ProtectedAudioPlayer({
 
   return (
     <audio
+      id={id}
       ref={audioRef}
       controls
       onContextMenu={(event) => event.preventDefault()}
