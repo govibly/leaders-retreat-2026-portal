@@ -111,6 +111,12 @@ export default async function SessionPage({ params }: SessionPageProps) {
             <p className="mt-5 text-sm uppercase tracking-[0.28em] text-[var(--muted-strong)]">
               Session {String(session.sortOrder).padStart(2, "0")} • {session.speaker}
             </p>
+            <a
+              className="brand-button-primary mt-6 w-full sm:w-auto xl:hidden"
+              href="#session-access"
+            >
+              Play Session
+            </a>
             <p className="mt-8 max-w-3xl text-base leading-8 text-[var(--muted-strong)] sm:text-lg">
               {session.coverCopy}
             </p>
@@ -141,7 +147,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
             </div>
           </div>
 
-          <aside className="surface-panel rounded-[2rem] p-5 sm:p-6">
+          <aside id="session-access" className="surface-panel scroll-mt-6 rounded-[2rem] p-5 sm:p-6">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[var(--muted)]">
                 Session access
