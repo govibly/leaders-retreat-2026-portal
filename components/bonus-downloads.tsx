@@ -32,7 +32,8 @@ export function BonusDownloads({
           <a
             key={bonus.id}
             href={bonus.publicUrl}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-[1.5rem] border border-[var(--border)] bg-white/5 px-5 py-5 hover:border-[var(--accent)] hover:bg-white/8"
           >
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[var(--muted)]">

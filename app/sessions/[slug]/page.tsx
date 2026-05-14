@@ -166,7 +166,8 @@ export default async function SessionPage({ params }: SessionPageProps) {
                 <a
                   key={`${session.id}-${download.id}`}
                   href={download.publicUrl}
-                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-[1.4rem] border border-[var(--border)] bg-white/5 px-4 py-4 hover:border-[var(--accent)] hover:bg-white/8"
                 >
                   <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[var(--muted)]">
